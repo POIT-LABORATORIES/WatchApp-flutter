@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class ItemList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final title = 'Basic List';
+    final title = 'Watch list';
 
     return MaterialApp(
       title: title,
