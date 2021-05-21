@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screens/Home.dart';
-import 'screens/Loading.dart';
+import 'package:watchapp/screens/Loading.dart';
+import 'package:watchapp/screens/Wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() {
@@ -53,7 +53,7 @@ class _AppState extends State<App> {
 
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.green),
-      home: Home()
+      home: Wrapper()
     );
   }
 }
