@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
-import 'screens/TabNavigationBar.dart';
+import 'screens/Home.dart';
 import 'screens/Loading.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-/*
-void main() {
-  runApp(TabNavigationBar());
-}
-*/
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -57,6 +51,9 @@ class _AppState extends State<App> {
       return Loading();
     }
 
-    return TabNavigationBar();
+    return MaterialApp(
+      theme: ThemeData(primarySwatch: Colors.green),
+      home: Home()
+    );
   }
 }

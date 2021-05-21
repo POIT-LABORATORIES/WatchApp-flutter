@@ -6,9 +6,7 @@ class ItemList extends StatelessWidget {
   Widget build(BuildContext context) {
     final title = 'Watch list';
 
-    return MaterialApp(
-      title: title,
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: Text(title),
         ),
@@ -20,7 +18,6 @@ class ItemList extends StatelessWidget {
             ),
           ],
         ),
-      ),
     );
   }
 }
