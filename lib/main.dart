@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:watchapp/models/user.dart';
 import 'package:watchapp/screens/Loading.dart';
 import 'package:watchapp/screens/Wrapper.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'package:watchapp/services/auth.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -51,9 +54,13 @@ class _AppState extends State<App> {
       return Loading();
     }
 
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.green),
-      home: Wrapper()
+    return StreamProvider<User>.value(
+      value: AuthService().user,
+      initialData: null,
+      child: MaterialApp(
+        theme: ThemeData(primarySwatch: Colors.green),
+        home: Wrapper()
+      ),
     );
   }
 }

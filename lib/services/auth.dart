@@ -9,9 +9,7 @@ class AuthService {
   }
 
   Stream<localUser.User> get user {
-    return _auth
-        .authStateChanges()
-        .map(_userFromFirebaseUser);
+    return _auth.authStateChanges().map(_userFromFirebaseUser);
   }
 
   Future signInAnon() async {
@@ -19,7 +17,16 @@ class AuthService {
       UserCredential userCredential = await _auth.signInAnonymously();
       return _userFromFirebaseUser(userCredential.user);
     } catch (e) {
-      print(e.message);
+      print(e.toString());
+    }
+  }
+
+  Future signOut() async {
+    try {
+      return await _auth.signOut();
+    } catch (e) {
+      print(e.toString());
+      return null;
     }
   }
 }

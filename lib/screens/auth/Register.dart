@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:watchapp/services/auth.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function toggleView;
 
-  SignIn({this.toggleView});
+  Register({ this.toggleView});
 
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
+class _RegisterState extends State<Register> {
   AuthService _auth = AuthService();
 
   String email = '';
@@ -22,14 +22,15 @@ class _SignInState extends State<SignIn> {
         appBar: AppBar(
             backgroundColor: Colors.blue[400],
             elevation: 0.0,
-            title: Text("Sign in"),
+            title: Text("Sign up"),
             actions: <Widget>[
-              IconButton(
-                  icon: Icon(Icons.person),
-                  tooltip: 'Sign in',
-                  onPressed: () {
-                    widget.toggleView();
-                  })
+            IconButton(
+              icon: Icon(Icons.person),
+              tooltip: 'Register',
+              onPressed: () {
+                widget.toggleView();
+              }
+            )
             ]),
         body: Container(
             padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
@@ -54,7 +55,7 @@ class _SignInState extends State<SignIn> {
                   print(email);
                   print(password);
                 },
-                child: Text("Sign in"),
+                child: Text("Register"),
               )
             ]))));
   }
