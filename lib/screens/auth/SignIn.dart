@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:watchapp/screens/Loading.dart';
 import 'package:watchapp/services/auth.dart';
 
 class SignIn extends StatefulWidget {
@@ -13,13 +14,14 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String email = '';
   String password = '';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.blue[400],
             elevation: 0.0,
@@ -39,12 +41,10 @@ class _SignInState extends State<SignIn> {
                 child: Column(children: <Widget>[
                   SizedBox(height: 20.0),
                   TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "Email"
-                    ),
+                    decoration: InputDecoration(hintText: "Email"),
                     onChanged: (val) {
-                    setState(() => email = val);
-                    }, 
+                      setState(() => email = val);
+                    },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter email';
@@ -54,9 +54,7 @@ class _SignInState extends State<SignIn> {
                   ),
                   SizedBox(height: 20.0),
                   TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "Password"
-                    ),
+                    decoration: InputDecoration(hintText: "Password"),
                     obscureText: true,
                     onChanged: (val) {
                       setState(() => password = val);
@@ -72,24 +70,23 @@ class _SignInState extends State<SignIn> {
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
-                        dynamic authResult =
-                          await _auth.signInWithEmailAndPassword(email, password);
-                        
+                        setState(() => loading = true);
+
+                        dynamic authResult = await _auth
+                            .signInWithEmailAndPassword(email, password);
+
                         if (authResult is String) {
-                          ScaffoldMessenger.of(context)
-                            .showSnackBar(SnackBar(content: Text(authResult)));
+                          setState(() => loading = false);
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(authResult)));
                         }
                         if (authResult == null) {
-                          ScaffoldMessenger.of(context)
-                            .showSnackBar(
-                              SnackBar(
-                                content: Text("Something went wrong")
-                                )
-                            );
-                        }
+                          setState(() => loading = false);
 
-                        ScaffoldMessenger.of(context)
-                        .showSnackBar(SnackBar(content: Text("Authorizing...")));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text("Something went wrong")));
+                        }
                       }
                     },
                     child: Text("Sign in"),

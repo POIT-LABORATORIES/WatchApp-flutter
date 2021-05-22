@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:watchapp/screens/Loading.dart';
 import 'package:watchapp/services/auth.dart';
 
 class Register extends StatefulWidget {
@@ -13,13 +14,14 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
+  bool loading = false;
 
   String email = '';
   String password = '';
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return loading ? Loading() : Scaffold(
         appBar: AppBar(
             backgroundColor: Colors.blue[400],
             elevation: 0.0,
@@ -75,14 +77,20 @@ class _RegisterState extends State<Register> {
                   ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState.validate()) {
-                        dynamic authResult =
-                          _auth.registerWithEmailAndPassword(email, password);
+                        setState(() => loading = true);
+
+                        dynamic authResult = await _auth.
+                          registerWithEmailAndPassword(email, password);
                         
                         if (authResult is String) {
+                          setState(() => loading = false);
+
                           ScaffoldMessenger.of(context)
                             .showSnackBar(SnackBar(content: Text(authResult)));
                         }
                         if (authResult == null) {
+                          setState(() => loading = false);
+
                           ScaffoldMessenger.of(context)
                             .showSnackBar(
                               SnackBar(
