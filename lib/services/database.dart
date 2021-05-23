@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
-  DatabaseService(String collectionName) {
-    collection = FirebaseFirestore.instance.collection(collectionName);
-  }
+  DatabaseService({ this.collection });
 
-  static CollectionReference collection;
+  final CollectionReference collection;
 
   Stream<QuerySnapshot> get items {
     return collection.snapshots();
