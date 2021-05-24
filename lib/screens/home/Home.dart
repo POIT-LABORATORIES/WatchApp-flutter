@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:watchapp/models/item.dart';
 import 'package:watchapp/screens/home/ItemList.dart';
 import 'package:watchapp/services/database.dart';
 
@@ -33,7 +34,7 @@ class _HomeState extends State<Home> {
 
     @override
   Widget build(BuildContext context) {
-    return StreamProvider<QuerySnapshot>.value(
+    return StreamProvider<List<Item>>.value(
       value: DatabaseService(FirestoreCollectionKey.watches).items,
       initialData: null,
       child: Scaffold(

@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:watchapp/models/item.dart';
 import 'package:watchapp/screens/Loading.dart';
+import 'package:watchapp/screens/home/item/ItemCreate.dart';
+import 'package:watchapp/screens/home/item/ItemDetail.dart';
 import 'package:watchapp/services/auth.dart';
 
 class ItemList extends StatefulWidget {
@@ -16,12 +19,9 @@ class _ItemListState extends State<ItemList> {
   Widget build(BuildContext context) {
     final title = 'Watch list';
 
-    final items = Provider.of<QuerySnapshot>(context);
+    final items = Provider.of<List<Item>>(context);
     if (items == null) {
       return Loading();
-    }
-    for (var doc in items.docs) {
-      print(doc.data);
     }
 
     return Scaffold(
@@ -32,42 +32,58 @@ class _ItemListState extends State<ItemList> {
                 await _auth.signOut();
               })
         ]),
-        body: GridView.count(
-          crossAxisCount: 2,
-          children: <Widget>[
-            Card(
-              elevation: 1.0,
-              child: Container(child: Text("Item 1")),
-            ),
-            Card(
+        body: ListView.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return ListTile(
+              title: Text(items[index].name),
+              subtitle: Text(items[index].style),
+              leading:
+                  Image.network(items[index].avatarUrl, fit: BoxFit.scaleDown),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemDetail(item: items[index])));
+              },
+            );
+          },
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            
+            Navigator.push(context, MaterialPageRoute(
+              builder: (context) => ItemCreate()
+            ));
+            
+          },
+          child: Icon(Icons.add_circle),
+          backgroundColor: Colors.blue,
+        ),
+        /*
+        body: GridView.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            return Card(
               elevation: 1.0,
               child: Column(
                 children: <Widget>[
-                  Image.network(
-                      "https://firebasestorage.googleapis.com/v0/b/watch-app-76470.appspot.com/o/images%2FAlpina%20AL-525G4TS6-avatar?alt=media&token=b946525c-46a7-4c23-b719-c41c2b5d3591",
+                  Image.network(items[index].avatarUrl,
                       height: 130.0,
                       fit: BoxFit.scaleDown),
                   SizedBox(height: 5.0),
-                  Text("Some watch rherthrth thtrhtrh trhsthgtsrh"),
+                  Text(items[index].name),
                 ],
               ),
-            ),
-          ],
+            );
+          },
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 5.0,
+            mainAxisSpacing: 5.0,
+          ),
         )
-        /*
-      body: ListView(
-        children: <Widget>[
-          ListTile(
-            leading: Icon(Icons.phone),
-            title: Text('Phone'),
-          ),
-          ListTile(
-            leading: Icon(Icons.car_repair),
-            title: Text('Car repair'),
-          ),
-        ],
-      ),
-      */
+        */
         );
   }
 }
