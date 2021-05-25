@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:watchapp/models/item.dart';
 import 'package:watchapp/screens/home/ItemList.dart';
 import 'package:watchapp/services/database.dart';
+import 'package:watchapp/screens/map/MapWrapper.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -16,10 +17,7 @@ class _HomeState extends State<Home> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     ItemList(),
-    Text(
-      'Index 1: Map',
-      style: optionStyle,
-    ),
+    MapWrapper(),
     Text(
       'Index 2: Settings',
       style: optionStyle,
