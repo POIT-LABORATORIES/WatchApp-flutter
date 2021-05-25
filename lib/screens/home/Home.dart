@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings_applications_sharp),
-              label: 'School',
+              label: 'Settings',
             ),
           ],
           currentIndex: _selectedIndex,
