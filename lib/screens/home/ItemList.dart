@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:watchapp/models/item.dart';
@@ -60,30 +59,6 @@ class _ItemListState extends State<ItemList> {
           child: Icon(Icons.add_circle),
           backgroundColor: Colors.blue,
         ),
-        /*
-        body: GridView.builder(
-          itemCount: items.length,
-          itemBuilder: (context, index) {
-            return Card(
-              elevation: 1.0,
-              child: Column(
-                children: <Widget>[
-                  Image.network(items[index].avatarUrl,
-                      height: 130.0,
-                      fit: BoxFit.scaleDown),
-                  SizedBox(height: 5.0),
-                  Text(items[index].name),
-                ],
-              ),
-            );
-          },
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 5.0,
-            mainAxisSpacing: 5.0,
-          ),
-        )
-        */
-        );
+    );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:watchapp/models/item.dart';
@@ -62,54 +61,3 @@ class _HomeState extends State<Home> {
     );
   }
 }
-
-/*
-class _HomeState extends State<Home> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.green),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text("Watch app")
-        ),
-        body: Container(),
-        bottomNavigationBar: ,
-      ),
-    );
-  }
-}
-*/
-
-/*
-class TabNavigationBar extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.green),
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              tabs: [
-                Tab(icon: Icon(Icons.list)),
-                Tab(icon: Icon(Icons.map)),
-                Tab(icon: Icon(Icons.settings)),
-              ],
-            ),
-            title: Text('Tabs Demo'),
-          ),
-          body: TabBarView(
-            children: [
-              ItemList(),
-              Icon(Icons.map),
-              Icon(Icons.settings),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-*/

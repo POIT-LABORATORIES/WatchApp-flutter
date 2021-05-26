@@ -4,6 +4,7 @@ import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'package:latlong/latlong.dart';
 import 'package:watchapp/models/item.dart';
 import 'package:watchapp/screens/Loading.dart';
+import 'package:watchapp/screens/home/item/ItemDetailSheet.dart';
 
 class MapPage extends StatefulWidget {
   final List<Item> items;
@@ -21,36 +22,44 @@ class _MapPageState extends State<MapPage> {
   // Used to trigger showing/hiding of popups.
   final PopupController _popupLayerController = PopupController();
 
+  final _customTextStyle = TextStyle(
+    color: Colors.black,
+    fontSize: 18,
+    fontFamily: 'Open Sans',
+    fontStyle: FontStyle.italic,
+  );
+
   @override
   void initState() {
     super.initState();
 
     _markers = widget.items
-        .map(
-          (Item item) => Marker(
-            point: LatLng(item.latitude, item.longitude),
-            width: _markerSize,
-            height: _markerSize,
-            //builder: (_) => Icon(Icons.location_on, size: _markerSize),
-            builder: (_) => Container(
-              child: IconButton(
-                icon: Icon(Icons.location_on,
-                    size: _markerSize, color: Colors.blue),
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (builder) {
-                      return Container(
-                        child: Text(item.name),
-                      );
-                    });
-                },
-              ),
-            ),
-            anchorPos: AnchorPos.align(AnchorAlign.top),
-          ),
-        )
-        .toList();
+    .map(
+      (Item item) => Marker(
+        point: LatLng(item.latitude, item.longitude),
+        width: _markerSize,
+        height: _markerSize,
+        builder: (_) => IconButton(
+          icon: Icon(Icons.location_on,
+              size: _markerSize, color: Colors.blue[600]),
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (builder) {
+                return SingleChildScrollView(
+                  child: DefaultTextStyle(
+                    style: _customTextStyle,
+                    child: ItemDetailSheet(item: item),
+                  ),
+                );
+              }
+            );
+          },
+        ),
+        anchorPos: AnchorPos.align(AnchorAlign.top),
+      ),
+    )
+    .toList();
   }
 
   @override
@@ -78,22 +87,6 @@ class _MapPageState extends State<MapPage> {
             subdomains: ['a', 'b', 'c'],
           ),
         ),
-        /*
-        PopupMarkerLayerWidget(
-          options: PopupMarkerLayerOptions(
-            markers: _markers,
-            popupSnap: PopupSnap.markerTop,
-            popupController: _popupLayerController,
-            popupBuilder: (context, marker) {
-              return null;
-            },
-            //MapPopup(marker),
-            popupAnimation: PopupAnimation.fade(
-              duration: Duration(milliseconds: 700),
-            ),
-          ),
-        ),
-        */
       ],
     );
   }
