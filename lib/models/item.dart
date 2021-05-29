@@ -1,7 +1,6 @@
 class Item {
   Item(
-    {
-      this.id,
+      {this.id,
       this.name,
       this.style,
       this.caseColor,
@@ -9,9 +8,7 @@ class Item {
       this.description,
       this.avatarUrl,
       this.latitude,
-      this.longitude
-    }
-  );
+      this.longitude});
 
   String id;
   String name;
@@ -22,4 +19,18 @@ class Item {
   String avatarUrl;
   double latitude;
   double longitude;
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'style': style,
+      'caseColor': caseColor,
+      'caseMaterial': caseMaterial,
+      'description': description,
+      'avatarUrl': avatarUrl,
+      'latitude': latitude,
+      'longitude': longitude,
+    };
+  }
 }

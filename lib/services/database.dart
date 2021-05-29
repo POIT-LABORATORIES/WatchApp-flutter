@@ -1,12 +1,19 @@
+import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:watchapp/models/item.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-class DatabaseService {
-  DatabaseService(String collectionName) {
+class FirestoreService {
+  FirestoreService(String collectionName) {
     collection = FirebaseFirestore.instance.collection(collectionName);
   }
 
   CollectionReference collection;
+
+  Future<void> addDocument(String docId, Map<String, dynamic> data) async {
+    return await collection.doc(docId).set(data);
+  }
 
   Future deleteDocument(String documentId) async {
     return await collection
@@ -18,6 +25,7 @@ class DatabaseService {
   List<Item> _itemListFromQuerySnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       var data = doc.data();
+      print(data[FirestoreWatchKey.id]);
       return Item(
           id: data[FirestoreWatchKey.id] ?? '',
           name: data[FirestoreWatchKey.name] ?? '',
@@ -51,4 +59,31 @@ class FirestoreWatchKey {
   static const longitude = "longitude";
   static const description = "description";
   static const avatarUrl = "avatarUrl";
+}
+
+class StorageService {
+  final String path;
+
+  StorageService({@required this.path});
+
+  Future<String> uploadFile(String fileName, File file) async {
+    try {
+      var ref =
+          firebase_storage.FirebaseStorage.instance.ref('$path/$fileName');
+      await ref.putFile(file);
+      return await ref.getDownloadURL();
+      /*
+      return await firebase_storage.FirebaseStorage.instance
+          .ref('$path/$fileName')
+          .putFile(file);
+          */
+    } on FirebaseException catch (e) {
+      print('Error while loading file to storage: ${e.message}');
+      // e.g, e.code == 'canceled'
+    }
+  }
+}
+
+class StoragePathKey {
+  static const images = "images";
 }

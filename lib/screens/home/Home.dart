@@ -32,7 +32,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Item>>.value(
-      value: DatabaseService(FirestoreCollectionKey.watches).items,
+      value: FirestoreService(FirestoreCollectionKey.watches).items,
       initialData: null,
       child: Scaffold(
         body: Center(
