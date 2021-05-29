@@ -1,15 +1,19 @@
 class Item {
-  Item({ 
-    this.name, 
-    this.style, 
-    this.caseColor, 
-    this.caseMaterial, 
-    this.description, 
-    this.avatarUrl,
-    this.latitude,
-    this.longitude
-    });
+  Item(
+    {
+      this.id,
+      this.name,
+      this.style,
+      this.caseColor,
+      this.caseMaterial,
+      this.description,
+      this.avatarUrl,
+      this.latitude,
+      this.longitude
+    }
+  );
 
+  String id;
   String name;
   String style;
   String caseColor;

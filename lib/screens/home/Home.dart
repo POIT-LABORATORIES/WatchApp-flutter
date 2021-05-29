@@ -29,7 +29,7 @@ class _HomeState extends State<Home> {
     });
   }
 
-    @override
+  @override
   Widget build(BuildContext context) {
     return StreamProvider<List<Item>>.value(
       value: DatabaseService(FirestoreCollectionKey.watches).items,

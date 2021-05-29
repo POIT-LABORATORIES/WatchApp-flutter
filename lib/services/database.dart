@@ -8,10 +8,18 @@ class DatabaseService {
 
   CollectionReference collection;
 
+  Future deleteDocument(String documentId) async {
+    return await collection
+        .doc(documentId)
+        .delete()
+        .catchError((error) => print("Failed to delete user: $error"));
+  }
+
   List<Item> _itemListFromQuerySnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       var data = doc.data();
       return Item(
+          id: data[FirestoreWatchKey.id] ?? '',
           name: data[FirestoreWatchKey.name] ?? '',
           style: data[FirestoreWatchKey.style] ?? '',
           caseColor: data[FirestoreWatchKey.caseColor] ?? '',
@@ -34,6 +42,7 @@ class FirestoreCollectionKey {
 }
 
 class FirestoreWatchKey {
+  static const id = "id";
   static const name = "name";
   static const style = "style";
   static const caseColor = "caseColor";
