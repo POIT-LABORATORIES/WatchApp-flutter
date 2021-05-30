@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:watchapp/models/item.dart';
-import 'package:watchapp/screens/map/MapPage.dart';
+import 'package:watchapp/screens/home/map/MapPage.dart';
 
 class MapWrapper extends StatefulWidget {
   @override

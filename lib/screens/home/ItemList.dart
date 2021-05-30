@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:watchapp/models/item.dart';
-import 'package:watchapp/screens/Loading.dart';
+import 'package:watchapp/screens/utilities/Loading.dart';
 import 'package:watchapp/screens/home/item/ItemCreate.dart';
 import 'package:watchapp/screens/home/item/ItemDetail.dart';
 import 'package:watchapp/services/auth.dart';

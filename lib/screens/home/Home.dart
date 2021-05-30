@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:watchapp/models/item.dart';
 import 'package:watchapp/screens/home/ItemList.dart';
+import 'package:watchapp/screens/home/map/MapWrapper.dart';
+import 'package:watchapp/screens/home/settings/Settings.dart';
 import 'package:watchapp/services/database.dart';
-import 'package:watchapp/screens/map/MapWrapper.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -17,10 +18,7 @@ class _HomeState extends State<Home> {
   static List<Widget> _widgetOptions = <Widget>[
     ItemList(),
     MapWrapper(),
-    Text(
-      'Index 2: Settings',
-      style: optionStyle,
-    ),
+    Settings(),
   ];
 
   void _onItemTapped(int index) {

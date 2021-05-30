@@ -25,7 +25,6 @@ class FirestoreService {
   List<Item> _itemListFromQuerySnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       var data = doc.data();
-      print(data[FirestoreWatchKey.id]);
       return Item(
           id: data[FirestoreWatchKey.id] ?? '',
           name: data[FirestoreWatchKey.name] ?? '',
@@ -72,11 +71,6 @@ class StorageService {
           firebase_storage.FirebaseStorage.instance.ref('$path/$fileName');
       await ref.putFile(file);
       return await ref.getDownloadURL();
-      /*
-      return await firebase_storage.FirebaseStorage.instance
-          .ref('$path/$fileName')
-          .putFile(file);
-          */
     } on FirebaseException catch (e) {
       print('Error while loading file to storage: ${e.message}');
       // e.g, e.code == 'canceled'

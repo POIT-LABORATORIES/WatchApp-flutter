@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:watchapp/models/item.dart';
-import 'package:watchapp/screens/Loading.dart';
+import 'package:watchapp/screens/utilities/Loading.dart';
 import 'package:watchapp/screens/home/item/ItemDetailSheet.dart';
 import 'package:watchapp/services/database.dart';
 
@@ -50,10 +50,6 @@ class _ItemDetailState extends State<ItemDetail> {
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                /*
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => ItemCreate()));
-              */
               },
               child: Icon(Icons.edit_outlined),
               backgroundColor: Colors.blue,

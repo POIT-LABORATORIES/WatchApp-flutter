@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:watchapp/models/item.dart';
-import 'package:watchapp/screens/Loading.dart';
+import 'package:watchapp/screens/utilities/Loading.dart';
 import 'package:watchapp/services/database.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';

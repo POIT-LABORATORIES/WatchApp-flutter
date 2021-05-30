@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:watchapp/screens/Loading.dart';
+import 'package:watchapp/screens/utilities/Loading.dart';
 import 'package:watchapp/services/auth.dart';
 
 class SignIn extends StatefulWidget {

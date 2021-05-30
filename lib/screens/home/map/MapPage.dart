@@ -3,7 +3,7 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_popup/flutter_map_marker_popup.dart';
 import 'package:latlong/latlong.dart';
 import 'package:watchapp/models/item.dart';
-import 'package:watchapp/screens/Loading.dart';
+import 'package:watchapp/screens/utilities/Loading.dart';
 import 'package:watchapp/screens/home/item/ItemDetailSheet.dart';
 
 class MapPage extends StatefulWidget {
